@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c054f452-272c-4d5a-aff1-336722d44052" name="Default Changelist" comment="" />
+    <list default="true" id="c054f452-272c-4d5a-aff1-336722d44052" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/layerfusion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/layerfusion.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/Da/Da113-1.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/Da/Da115-2.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/JinMeiMaoKaiPoLieGuoJiMa/jinmeimaokaipolie.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imagelayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/imagelayer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/results.png" beforeDir="false" afterPath="$PROJECT_DIR$/results/results.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template.py" beforeDir="false" afterPath="$PROJECT_DIR$/template.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/text/image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/text/image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/word2pic.py" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,26 +26,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imagelayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2478">
-              <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/template.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+            <state relative-caret-position="952">
+              <caret line="214" column="33" selection-start-line="214" selection-start-column="33" selection-end-line="214" selection-end-column="33" />
               <folding>
-                <element signature="e#0#23#0" expanded="true" />
-                <marker date="1565009965091" expanded="true" signature="562:1279" ph="..." />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="548">
+              <caret line="110" column="29" selection-start-line="110" selection-start-column="29" selection-end-line="110" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/background/WechatIMG59.jpeg">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/results/results_notext.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/results/results.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
@@ -46,12 +71,21 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>print</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/imagelayer" />
         <option value="$PROJECT_DIR$/template1.py" />
         <option value="$PROJECT_DIR$/word2pic.py" />
+        <option value="$PROJECT_DIR$/style_transfer/imageStyle_transfer.py" />
         <option value="$PROJECT_DIR$/imagelayer.py" />
         <option value="$PROJECT_DIR$/template.py" />
       </list>
@@ -61,6 +95,7 @@
     <option name="width" value="1280" />
     <option name="height" value="800" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -76,13 +111,22 @@
             <path>
               <item name="layerfusion" type="b2602c69:ProjectViewProjectNode" />
               <item name="layerfusion" type="462c0819:PsiDirectoryNode" />
-              <item name="font" type="462c0819:PsiDirectoryNode" />
+              <item name="background" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="layerfusion" type="b2602c69:ProjectViewProjectNode" />
               <item name="layerfusion" type="462c0819:PsiDirectoryNode" />
               <item name="font" type="462c0819:PsiDirectoryNode" />
-              <item name="HanYiShangWeiShouShu" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="layerfusion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="layerfusion" type="462c0819:PsiDirectoryNode" />
+              <item name="foreground" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="layerfusion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="layerfusion" type="462c0819:PsiDirectoryNode" />
+              <item name="logo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="layerfusion" type="b2602c69:ProjectViewProjectNode" />
@@ -95,6 +139,9 @@
       </pane>
       <pane id="Scope" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -208,7 +255,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
@@ -216,7 +263,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -249,12 +296,6 @@
     <entry file="file://$PROJECT_DIR$/image.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/text/image.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/text/image.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/word2pic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
@@ -271,50 +312,96 @@
     <entry file="file://$PROJECT_DIR$/foreground/ford-63930_1280.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG5.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/background/WechatIMG60.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/background/WechatIMG59.jpeg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/background/WechatIMG58.jpeg">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/SR_test/SR_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SR_test/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1417">
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/background/WechatIMG63.jpeg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG64.png">
+    <entry file="file://$PROJECT_DIR$/style_transfer/transformer_net.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style_transfer/imageStyle_transfer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG65.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG62.png">
+    <entry file="file://$PROJECT_DIR$/text/image.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/text/image.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/foreground/WechatIMG14.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/results.png">
+    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG62.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG64.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG5.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/imagelayer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2478">
-          <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+        <state relative-caret-position="952">
+          <caret line="214" column="33" selection-start-line="214" selection-start-column="33" selection-end-line="214" selection-end-column="33" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
-            <marker date="1565009965091" expanded="true" signature="562:1279" ph="..." />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/background/WechatIMG59.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="110" column="29" selection-start-line="110" selection-start-column="29" selection-end-line="110" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/results_notext.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/results.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
 </project>

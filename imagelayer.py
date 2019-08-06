@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import colorsys
+import PIL.Image as Image
 
 def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=3500, bgRatio=1.5):
     #read image
@@ -24,7 +26,6 @@ def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=3500, bgRatio=1.5):
         mask = alpha
         mask_inv = cv2.bitwise_not(mask)
         # black-out the area in ROI
-        print(roi.shape, img_1_resize.shape)
         img2_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
 
         # Take only region of foreground from foreground image.
@@ -32,7 +33,6 @@ def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=3500, bgRatio=1.5):
         # Put logo in ROI and modify the main image
         dst = cv2.add(img2_bg, img1_fg)
     else:
-        print(img_1_resize.shape,roi.shape)
         dst = cv2.addWeighted(img_1_resize,1,roi,0,0)
     img_2_resize[int(fgPos[0]):int(fgPos[0]+rows), int(fgPos[1]):int(fgPos[1]+cols)] = dst
     return img_2_resize
@@ -211,7 +211,27 @@ def img_circle(img):
     # 保存图片
     return img_final
 
+def img_color(image):
+    image = image.convert('RGBA')
+    image.thumbnail((200, 200))
+    max_score = 0.0001
+    dominant_color = None
+    for count, (r, g, b, a) in image.getcolors(image.size[0] * image.size[1]):
+        if a == 0:
+            continue
+        # 转为HSV标准
+        saturation = colorsys.rgb_to_hsv(r / 255.0, g / 255.0, b / 255.0)[1]
+        y = min(abs(r * 2104 + g * 4130 + b * 802 + 4096 + 131072) >> 13, 235)
+        y = (y - 16.0) / (235 - 16)
 
+        # 忽略高亮色
+        if y > 0.9:
+            continue
+        score = (saturation + 0.1) * count
+        if score > max_score:
+            max_score = score
+            dominant_color = (r, g, b)
+    return dominant_color
 # img = Transparent(img_1, img_2, alpha)
 # img = Multiply (img_1, img_2)
 # img = Color_burn(img_1, img_2)

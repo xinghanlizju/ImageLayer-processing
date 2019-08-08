@@ -96,7 +96,7 @@ def addtxt(ImgPath,txt,txtpos):
     image = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     bg_color = il.img_color(image)
     print(bg_color)
-    txt_color = il.complement(bg_color[0],bg_color[1],bg_color[2])
+    txt_color = [255-bg_color[0],255-bg_color[1],255-bg_color[2]]
     print(txt_color)
     #chooose txt place direction
     switcher = {
@@ -120,6 +120,9 @@ def addtxt(ImgPath,txt,txtpos):
             if i == 0:
                 # 绘制文字信息
                 font = ImageFont.truetype(foo, 80, encoding='utf-8')
+                tw, th = draw.textsize(txt[i], font=font)
+                if tw > w:
+                    txt[i]=txt[i][:6]+'\n'+txt[i][6:]
                 tw, th = draw.textsize(txt[i], font=font)
                 draw.text((int(txtpos[0][0] * w + k[0] * tw), int(txtpos[0][1] * h + k[1] * th)), txt[i], font=font,
                               fill=(txt_color[0], txt_color[1], txt_color[2]))
@@ -174,7 +177,7 @@ def addtxt(ImgPath,txt,txtpos):
 
 if __name__=="__main__":
     fgPath = 'foreground/WechatIMG62.png'
-    txt = [u"速度与激情", u"方向只有我一个\n速度由我掌控"]
+    txt = [u"第十八届星翰汽车展览会", u"方向只有我一个\n速度由我掌控"]
     #txt = [u"速度与激情",u"方向只有我一个\n 速度由我掌控",u"最高车速|燃油经济|操作稳定|行驶平顺"]
     bgPath = 'background/WechatIMG58.jpeg'
     imgPath, txtPos = choosetemplate(bgPath,fgPath)

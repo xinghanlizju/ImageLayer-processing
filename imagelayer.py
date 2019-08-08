@@ -232,6 +232,32 @@ def img_color(image):
             max_score = score
             dominant_color = (r, g, b)
     return dominant_color
+
+def hilo(a, b, c):
+    if c < b: b, c = c, b
+    if b < a: a, b = b, a
+    if c < b: b, c = c, b
+    return a + c
+
+def complement(r, g, b):
+    k = hilo(r, g, b)
+    return tuple(k - u for u in (r, g, b))
+
+def complement_image(iname, oname):
+    print('Loading', iname)
+    img = Image.open(iname)
+    #img.show()
+
+    size = img.size
+    mode = img.mode
+    in_data = img.getdata()
+
+    print('Complementing...')
+    out_img = Image.new(mode, size)
+    out_img.putdata([complement(*rgb) for rgb in in_data])
+    out_img.show()
+    out_img.save(oname)
+    print('Saved to', oname)
 # img = Transparent(img_1, img_2, alpha)
 # img = Multiply (img_1, img_2)
 # img = Color_burn(img_1, img_2)

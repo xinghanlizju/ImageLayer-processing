@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c054f452-272c-4d5a-aff1-336722d44052" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/layerfusion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/layerfusion.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/Da/Da113-1.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/Da/Da115-2.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/JinMeiMaoKaiPoLieGuoJiMa/jinmeimaokaipolie.ttf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/imagelayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/imagelayer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/results/results.png" beforeDir="false" afterPath="$PROJECT_DIR$/results/results.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template.py" beforeDir="false" afterPath="$PROJECT_DIR$/template.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text/image.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/text/image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/word2pic.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imagelayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="214" column="33" selection-start-line="214" selection-start-column="33" selection-end-line="214" selection-end-column="33" />
+            <state relative-caret-position="-69">
+              <caret line="235" selection-start-line="235" selection-end-line="235" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -35,31 +27,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
-              <caret line="110" column="29" selection-start-line="110" selection-start-column="29" selection-end-line="110" selection-end-column="29" />
+            <state relative-caret-position="2715">
+              <caret line="181" column="60" selection-start-line="181" selection-start-column="60" selection-end-line="181" selection-end-column="60" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/background/WechatIMG59.jpeg">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results/results_notext.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/results/results.png">
-          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -116,22 +93,16 @@
             <path>
               <item name="layerfusion" type="b2602c69:ProjectViewProjectNode" />
               <item name="layerfusion" type="462c0819:PsiDirectoryNode" />
-              <item name="font" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="layerfusion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="layerfusion" type="462c0819:PsiDirectoryNode" />
               <item name="foreground" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="layerfusion" type="b2602c69:ProjectViewProjectNode" />
               <item name="layerfusion" type="462c0819:PsiDirectoryNode" />
-              <item name="logo" type="462c0819:PsiDirectoryNode" />
+              <item name="results" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="layerfusion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="layerfusion" type="462c0819:PsiDirectoryNode" />
-              <item name="results" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -248,6 +219,14 @@
       <option name="presentableId" value="Default" />
       <updated>1564581266815</updated>
     </task>
+    <task id="LOCAL-00001" summary="主要修改了字体颜色">
+      <created>1565084758756</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1565084758756</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -255,7 +234,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
@@ -263,7 +242,7 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -274,7 +253,7 @@
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2494043" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
@@ -282,7 +261,7 @@
       <window_info anchor="bottom" id="Python Console" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.32876712" />
-      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.32876712" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32876712" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -291,6 +270,10 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="主要修改了字体颜色" />
+    <option name="LAST_COMMIT_MESSAGE" value="主要修改了字体颜色" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/image.jpg">
@@ -312,12 +295,6 @@
     <entry file="file://$PROJECT_DIR$/foreground/ford-63930_1280.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/background/WechatIMG60.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/background/WechatIMG58.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/SR_test/SR_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -337,9 +314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/background/WechatIMG63.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/style_transfer/transformer_net.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -353,9 +327,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG65.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/text/image.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -365,43 +336,61 @@
     <entry file="file://$PROJECT_DIR$/foreground/WechatIMG14.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG62.png">
+    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG5.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logo/leksas.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/foreground/WechatIMG64.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG5.png">
+    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG62.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/background/WechatIMG59.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/background/WechatIMG58.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/foreground/WechatIMG65.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/imagelayer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="214" column="33" selection-start-line="214" selection-start-column="33" selection-end-line="214" selection-end-column="33" />
+        <state relative-caret-position="-69">
+          <caret line="235" selection-start-line="235" selection-end-line="235" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/background/WechatIMG59.jpeg">
+    <entry file="file://$PROJECT_DIR$/background/WechatIMG60.jpeg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="110" column="29" selection-start-line="110" selection-start-column="29" selection-end-line="110" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/background/WechatIMG63.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/results_complementary.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/results/results_notext.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/results/results.png">
       <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2715">
+          <caret line="181" column="60" selection-start-line="181" selection-start-column="60" selection-end-line="181" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

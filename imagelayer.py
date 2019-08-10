@@ -3,7 +3,7 @@ import numpy as np
 import colorsys
 import PIL.Image as Image
 
-def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=3500, bgRatio=1.5):
+def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=1080, dir=0):
     #read image
     img_1=fgImg
     img_2=bgImg
@@ -15,7 +15,13 @@ def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=3500, bgRatio=1.5):
 
     rows, cols, channels = img_1_resize.shape
     #Pos ratio convert into Pos
-    fgPos = [bgSize * fgPosRatio[0] - int(0.5 * rows), int(img_2.shape[1]*bgSize/img_2.shape[0]) * fgPosRatio[1] - int(0.5 * cols)]
+    if dir == 0:
+        fgPos = [bgSize * fgPosRatio[0] - int(0.5 * rows), int(img_2.shape[1]*bgSize/img_2.shape[0]) * fgPosRatio[1] - int(0.5 * cols)]
+    elif dir == 1:
+        fgPos = [bgSize * fgPosRatio[0], int(img_2.shape[1]*bgSize/img_2.shape[0]) * fgPosRatio[1] - cols]
+    else:
+        fgPos = [bgSize * fgPosRatio[0], int(img_2.shape[1]*bgSize/img_2.shape[0]) * fgPosRatio[1]]
+
     # img_text_pos=[bgSize*0.75, bgSize*bgRatio*0.8485]
     #create a ROI
     roi = img_2_resize[int(fgPos[0]):int(fgPos[0]+rows), int(fgPos[1]):int(fgPos[1]+cols)]
@@ -244,7 +250,6 @@ def complement(r, g, b):
     return tuple(k - u for u in (r, g, b))
 
 def complement_image(iname, oname):
-    print('Loading', iname)
     img = Image.open(iname)
     #img.show()
 
@@ -252,25 +257,7 @@ def complement_image(iname, oname):
     mode = img.mode
     in_data = img.getdata()
 
-    print('Complementing...')
     out_img = Image.new(mode, size)
     out_img.putdata([complement(*rgb) for rgb in in_data])
-    out_img.show()
     out_img.save(oname)
-    print('Saved to', oname)
-# img = Transparent(img_1, img_2, alpha)
-# img = Multiply (img_1, img_2)
-# img = Color_burn(img_1, img_2)
-# img = Color_dodge(img_1, img_2)
-# img = Linear_burn(img_1, img_2)
-# img = Linear_dodge(img_1, img_2)
-# img = Lighten(img_1, img_2)
-# img = Dark (img_1, img_2)
-# img = Screen(img_1, img_2)
-# img = Overlay(img_1, img_2)
-# img = Soft_light(img_1, img_2)
-# img = Hard_light(img_1, img_2)
-# img = Vivid_light(img_1, img_2)
-# img = Pin_light(img_1, img_2)
-# img = Linear_light(img_1, img_2)
-# img = Hard_mix(img_1, image_resize)
+

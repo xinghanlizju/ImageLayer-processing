@@ -22,7 +22,7 @@ def template1(bgPath ,fgPath,txt) :
     #选择合适的前景大小
     fg_hsize=min(0.666*wi*hf/wf,0.666*hi)
 
-    img = il.imgadd(fgImg, bgImg, [0.66, 0.5], round(fg_hsize), 1080)#前景、背景、前景位置、前景大小、背景大小
+    img = il.imgadd(fgImg, bgImg, [0.6, 0.5], round(fg_hsize), 1080)#前景、背景、前景位置、前景大小、背景大小
 
     #生成文字的图像
     ROI_txt = img[int(hi / 6):int(5*hi/6), int(wi / 6):int(5*wi/6)]
@@ -49,7 +49,7 @@ def template2(bgPath ,fgPath,txt):
     # 选择合适的前景大小
     fg_hsize = min(0.666 * wi * hf / wf, 0.666 * hi)
 
-    img = il.imgadd(fgImg, bgImg, [0.866, 0.5], round(fg_hsize), 1080)
+    img = il.imgadd(fgImg, bgImg, [0.8, 0.5], round(fg_hsize), 1080)
 
 
     #生成文字的图像和位置
@@ -141,26 +141,27 @@ def template6(bgPath ,fgPath,txt):
     else:
         bgImg = cv2.resize(bgImg,(774,1080), interpolation=cv2.INTER_AREA) # crop background
 
+    hi, wi, channeli = bgImg.shape
     hf, wf, channelf = fgImg.shape
 
     # 选择合适的前景大小
-    fg_hsize = min(0.8 * w * hf / wf, 0.8 * h)
+    fg_hsize = min(0.8 * wi * hf / wf, 0.8 * hi)
     img = il.imgadd(fgImg, bgImg, [0.5, 0.5], int(fg_hsize), 1080)
-    ROI_txt = img[0:int(h / 2), 0:int(w / 2)]
+    ROI_txt = img[0:int(hi / 2), 0:int(wi / 2)]
     txtImage(txt, "horizontal", ROI_txt)
     txtpos = [[0.05, 0.05, -1], [0.05, 0.8, -1], [0.952, 0.95, 0]]
     print("template 6")
     return img, txtpos
 
-def choosetemplate(bgPath,fgPath,txt):
+def choosetemplate(bgPath,fgPath,txt,outputPath):
     fgImg = cv2.imread(fgPath, -1)
     h, w, channel = fgImg.shape
     if 5*h < 7*w :
         img, txtpos = random.choice([template1, template2, template3, template6])(bgPath,fgPath,txt)
     else:
         img, txtpos = random.choice([template4, template5])(bgPath,fgPath,txt)
-    cv2.imwrite("results/results_notext.png",img,[int(cv2.IMWRITE_PNG_COMPRESSION), 3])
-    return "results/results_notext.png", txtpos
+    cv2.imwrite(outputPath,img,[int(cv2.IMWRITE_PNG_COMPRESSION), 3])
+    return txtpos
 
 def txtImage(txt,direction,img):
     if direction =="horizontal":
@@ -300,7 +301,7 @@ def txtImage(txt,direction,img):
     else:
         print("This txt direction "+direction+" is not defined!")
 
-def addallimage(ImgPath,txtpos):
+def addallimage(ImgPath,txtpos,outputPath):
     logoPath = "logo/WechatIMG126.png"
     img = cv2.imread(ImgPath,-1)
     logoimg = cv2.imread(logoPath,-1)
@@ -309,12 +310,14 @@ def addallimage(ImgPath,txtpos):
         txth, txtw, txtchannel = txt_img.shape
         img = il.imgadd(txt_img, img, [txtpos[ti][1], txtpos[ti][0]], txth, 1080, txtpos[ti][-1])
     img = il.imgadd(logoimg,img,[txtpos[-1][1],txtpos[-1][0]], int(1080/15), 1080)
-    cv2.imwrite("results/results.png", img, [int(cv2.IMWRITE_PNG_COMPRESSION), 3])
+    cv2.imwrite(outputPath, img, [int(cv2.IMWRITE_PNG_COMPRESSION), 3])
 
 if __name__=="__main__":
-    fgPath = 'foreground/WechatIMG65.png'
+    outputPath_text = 'results/results.png'
+    outputPath_notext = 'results/results_notext.png'
+    fgPath = 'foreground/WechatIMG247.png'
     txt = [u"第十八届上海国际汽车展会", u"时间：4月28日\n地点：广东省广州市开源大道232号企业加速器道232号"]
     #txt = [u"速度与激情",u"方向只有我一个\n 速度由我掌控",u"最高车速|燃油经济|操作稳定|行驶平顺"]
-    bgPath = 'background/WechatIMG60.jpeg'
-    imgPath, pos = choosetemplate(bgPath, fgPath, txt)
-    addallimage(imgPath,pos)
+    bgPath = 'background/WechatIMG246.jpeg'
+    pos = choosetemplate(bgPath, fgPath, txt, outputPath_notext)
+    addallimage(outputPath_notext,pos,outputPath_text)

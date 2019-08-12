@@ -17,8 +17,6 @@ def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=1080, dir=0):
     #image normalizatiom
     img_1_resize=cv2.resize(img_1, (int(img_1.shape[1]*fgSize/img_1.shape[0]), fgSize), interpolation=cv2.INTER_AREA)
     img_2_resize=cv2.resize(img_2, (int(img_2.shape[1]*bgSize/img_2.shape[0]), bgSize), interpolation=cv2.INTER_AREA)
-    print('good',img_2_resize.shape)
-    print('bad', img_1_resize.shape)
 
     rows, cols, channels = img_1_resize.shape
     #Pos ratio convert into Pos
@@ -31,8 +29,7 @@ def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=1080, dir=0):
 
     # img_text_pos=[bgSize*0.75, bgSize*bgRatio*0.8485]
     #create a ROI
-    print('fgPos[0]',fgPos[0])
-    print('fgPos[1]',fgPos[1])
+
     #fgPos[0],点的行位置，
     #fgPos[1]点的列位置，img_2_resize.shape[0]背景图片的长度，[1]宽度，cols指的是前景的长，rows指的是前景的宽
     #前景图片超出背景图片的右部分
@@ -54,7 +51,6 @@ def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=1080, dir=0):
     # roi = img_2_resize[max(int(fgPos[0]), 0):min(int(fgPos[0]+rows), img_2_resize.shape[0]-1), max(int(fgPos[1]), 0):min(int(fgPos[1]+cols), img_2_resize.shape[1]-1)]
 
     roi = img_2_resize[max(int(fgPos[0]),0):max(int(fgPos[0]),0) + rows, max(int(fgPos[1]),0):max(int(fgPos[1] ),0)+ cols]
-    print(int(fgPos[1]), roi.shape)
 
     #create a mask of logo and create its inverse mask
     if channels > 3:
@@ -65,8 +61,6 @@ def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=1080, dir=0):
         # mask_final= tuple()
         # black-out the area in ROI
         # print('mask_inv',mask_inv)
-        print('roi.shape',roi.shape)
-        print('mask_inv.shape',mask_inv.shape)
 
         # mask_final = mask_inv.resize(min(roi.shape[0],mask_inv.shape[0]),min(roi.shape(1),mask_inv.shape(1)))
         img2_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)

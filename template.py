@@ -76,7 +76,7 @@ def template3(bgPath ,fgPath,txt):
     img = il.imgadd(fgImg, bgImg, [0.5, 0.5], int(1 * 1080 / 2), 1080)
 
     hi, wi, channeli = img.shape
-    ROI_txt = img[int(1*hi / 9):int(8 * hi / 9), int(wi / 6):int(5 * wi / 6)]
+    ROI_txt = img[int(1*hi / 9):int(8 * hi / 9), int(wi / 2):wi]
 
     txtImage(txt,"vertical", ROI_txt)
     pos = [[0.99, 1/9, 1], [0.1, 0.5, 0], [0.5, 0.95, 0]]
@@ -153,13 +153,110 @@ def template6(bgPath ,fgPath,txt):
     print("template 6")
     return img, txtpos
 
+def template7(bgPath, fgPath, txt):
+    bgImg = cv2.imread(bgPath, -1)
+    fgImg = cv2.imread(fgPath, -1)
+    h, w, channel = bgImg.shape
+    if h / w < 7 / 5:
+        bgImg = bgImg[0:h, int(w / 2 - h * 5.0 / 14.0):int(w / 2 + h * 5.0 / 14.0)]  # crop background
+        bgImg = cv2.resize(bgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+
+    else:
+        bgImg = cv2.resize(bgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+
+    hi, wi, channeli = bgImg.shape
+    hf, wf, channelf = fgImg.shape
+
+    # 选择合适的前景大小
+    fg_hsize = min(0.8 * wi * hf / wf, 0.8 * hi)
+    img = il.imgadd(fgImg, bgImg, [0.5, 0.5], int(fg_hsize), 1080)
+    ROI_txt = img[0:int(hi / 2), int(wi / 2):int(wi)]
+    txtImage(txt, "horizontal", ROI_txt)
+    txtpos = [[0.95, 0.05, 1], [0.95, 0.8, 1], [0.048, 0.95, 0]]
+    print("template 7")
+    return img, txtpos
+
+def template8(bgPath ,fgPath,txt):
+    bgImg = cv2.imread(bgPath, -1)
+    fgImg = cv2.imread(fgPath, -1)
+    h, w, channel = bgImg.shape
+
+    if h / w < 7 / 5:
+        bgImg = bgImg[0:h, int(w / 2 - h * 5.0 / 14.0):int(w / 2 + h * 5.0 / 14.0)]  # crop background
+        bgImg = cv2.resize(bgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+    else:
+        bgImg = cv2.resize(bgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+
+    fgImg = il.img_circle(fgImg)
+
+    img = il.imgadd(fgImg, bgImg, [0.5, 0.5], int(1 * 1080 / 2), 1080)
+
+    hi, wi, channeli = img.shape
+    #第一段文字
+    ROI_txt = img[int(1*hi / 9):int(8 * hi / 9), int(wi / 2):wi]
+    txtImage([txt[0],''],"vertical", ROI_txt)
+    #第二段文字
+    ROI_txt = img[int(3 * hi / 4):hi, 0 : int(wi / 2)]
+    txtImage(['',txt[1]], "horizontal", ROI_txt)
+
+    pos = [[0.99, 1/9, 1], [0.05, 3/4, -1], [0.5, 0.95, 0]]
+
+    print("template 8")
+    return img, pos
+
+def template9(bgPath ,fgPath,txt):
+    bgImg = cv2.imread(bgPath, -1)
+    fgImg = cv2.imread(fgPath, -1)
+    h, w, channel = bgImg.shape
+    if h / w < 7 / 5:
+        bgImg = bgImg[0:h, int(w / 2 - h * 5.0 / 14.0):int(w / 2 + h * 5.0 / 14.0)]  # crop background
+        bgImg = cv2.resize(bgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+    else:
+        bgImg = cv2.resize(bgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+
+    hi, wi, channeli = bgImg.shape
+    # 前景大小
+    hf, wf, channelf = fgImg.shape
+
+    # 选择合适的前景大小
+    fg_hsize = min(0.666 * wi * hf / wf, 0.666 * hi)
+    img = il.imgadd(fgImg, bgImg, [0.5, 0.5], round(fg_hsize), 1080)
+
+    ROI_txt = img[0:int(hi/3), int(wi / 6):int(5 * wi / 6)]
+    txtImage(txt, "horizontal", ROI_txt)
+
+    txtpos = [[0.5, 0.1346, 0], [0.5, 0.9, 0], [0.95, 0.95, 0]]
+
+    print("template 9")
+    return img, txtpos
+
+def template10(bgPath ,fgPath,txt):
+    bgImg = cv2.imread(bgPath, -1)
+    fgImg = cv2.imread(fgPath, -1)
+    h, w, channel = bgImg.shape
+    if h / w < 7 / 5:
+        bgImg = bgImg[0:h, int(w / 2 - h * 5.0 / 14.0):int(w / 2 + h * 5.0 / 14.0)]  # crop background
+        bgImg = cv2.resize(bgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+    else:
+        bgImg = cv2.resize(bgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+    hi, wi, channeli = bgImg.shape
+    hf, wf, channelf = fgImg.shape
+    fg_hsize = min(0.7 * wi * hf / wf, 0.7 * hi)
+    img = il.imgadd(fgImg, bgImg, [0.6, 0.7], round(fg_hsize), 1080)
+
+    ROI_txt = img[0:hi, 0:int(wi / 2)]
+    txtImage(txt, "horizontal", ROI_txt)
+    txtpos = [[0.05, 0.1, -1], [0.05, 0.6, -1], [0.95, 0.05, 0]]
+    print("template 10")
+    return img, txtpos
+
 def choosetemplate(bgPath,fgPath,txt,outputPath):
     fgImg = cv2.imread(fgPath, -1)
     h, w, channel = fgImg.shape
     if 5*h < 7*w :
-        img, txtpos = random.choice([template1, template2, template3, template6])(bgPath,fgPath,txt)
+        img, txtpos = random.choice([template1, template2, template3, template6, template7, template8])(bgPath, fgPath, txt)
     else:
-        img, txtpos = random.choice([template4, template5])(bgPath,fgPath,txt)
+        img, txtpos = random.choice([template3, template4, template5, template8, template9, template10])(bgPath, fgPath, txt)
     cv2.imwrite(outputPath,img,[int(cv2.IMWRITE_PNG_COMPRESSION), 3])
     return txtpos
 
@@ -182,6 +279,8 @@ def txtImage(txt,direction,img):
 
         # create the txt image
         for i in range(len(txt)):
+            if txt[i] == '':
+                continue
             if i == 0:
                 # 绘制文字信息
                 font = ImageFont.truetype(foo, 80, encoding='utf-8')
@@ -240,6 +339,8 @@ def txtImage(txt,direction,img):
         foo = choice(fontpath)
 
         for i in range(len(txt)):
+            if txt[i] == '':
+                continue
             if i == 0:
                 right = 0  # 往右位移量
                 down = 0  # 往下位移量
@@ -315,7 +416,7 @@ def addallimage(ImgPath,txtpos,outputPath):
 if __name__=="__main__":
     outputPath_text = 'results/results.png'
     outputPath_notext = 'results/results_notext.png'
-    fgPath = 'foreground/WechatIMG247.png'
+    fgPath = 'foreground/WechatIMG65.png'
     txt = [u"第十八届上海国际汽车展会", u"时间：4月28日\n地点：广东省广州市开源大道232号企业加速器道232号"]
     #txt = [u"速度与激情",u"方向只有我一个\n 速度由我掌控",u"最高车速|燃油经济|操作稳定|行驶平顺"]
     bgPath = 'background/WechatIMG246.jpeg'

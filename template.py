@@ -4,6 +4,7 @@ import cv2
 from PIL import ImageFont, ImageDraw, Image
 from random import choice
 from math import ceil
+import os
 
 def template1(bgPath ,fgPath,txt) :
     bgImg = cv2.imread(bgPath, -1)
@@ -261,6 +262,9 @@ def choosetemplate(bgPath,fgPath,txt,outputPath):
     return txtpos
 
 def txtImage(txt,direction,img):
+    folder = os.path.exists("txt_image")
+    if not folder:
+        os.makedirs("txt_image")
     if direction =="horizontal":
         h, w, channel = img.shape
         # choose txt_color by image background

@@ -26,7 +26,7 @@ def template1(bgPath ,fgPath,txt) :
     img = il.imgadd(fgImg, bgImg, [0.6, 0.5], round(fg_hsize), 1080)#前景、背景、前景位置、前景大小、背景大小
 
     #生成文字的图像
-    ROI_txt = img[int(hi / 6):int(5*hi/6), int(wi / 6):int(5*wi/6)]
+    ROI_txt = img[int(hi / 6):int(1*hi/3), int(wi / 8):int(7*wi/8)]
     txtImage(txt, "horizontal", ROI_txt)
     pos = [[0.5, 0.15, 0], [0.5, 0.8, 0], [0.952, 0.95, 0]]
 
@@ -54,7 +54,7 @@ def template2(bgPath ,fgPath,txt):
 
 
     #生成文字的图像和位置
-    ROI_txt = img[int(hi / 7):int(6 * hi / 7), int(wi / 6):int(5 * wi / 6)]
+    ROI_txt = img[int(hi / 6):int(1*hi/3), int(wi / 8):int(7 * wi / 8)]
     txtImage(txt,"horizontal",ROI_txt)
     pos = [[0.5, 0.2, 0], [0.5, 0.4, 0], [0.05, 0.95, 0]]
 
@@ -103,7 +103,7 @@ def template4(bgPath ,fgPath,txt):
     fg_hsize = min(0.666 * wi * hf / wf, 0.666 * hi)
     img = il.imgadd(fgImg, bgImg, [0.65, 0.5], round(fg_hsize), 1080)
 
-    ROI_txt = img[0:hi, int(wi / 6):int(5 * wi / 6)]
+    ROI_txt = img[0:int(hi/3), int(wi / 9):int(8 * wi / 9)]
     txtImage(txt, "horizontal", ROI_txt)
 
     txtpos = [[0.5, 0.1346, 0], [0.5, 0.3, 0], [0.95, 0.95, 0]]
@@ -148,7 +148,7 @@ def template6(bgPath ,fgPath,txt):
     # 选择合适的前景大小
     fg_hsize = min(0.8 * wi * hf / wf, 0.8 * hi)
     img = il.imgadd(fgImg, bgImg, [0.5, 0.5], int(fg_hsize), 1080)
-    ROI_txt = img[0:int(hi / 2), 0:int(wi / 2)]
+    ROI_txt = img[0:int(hi / 3), 0:int(wi / 2)]
     txtImage(txt, "horizontal", ROI_txt)
     txtpos = [[0.05, 0.05, -1], [0.05, 0.8, -1], [0.952, 0.95, 0]]
     print("template 6")
@@ -223,7 +223,7 @@ def template9(bgPath ,fgPath,txt):
     fg_hsize = min(0.666 * wi * hf / wf, 0.666 * hi)
     img = il.imgadd(fgImg, bgImg, [0.5, 0.5], round(fg_hsize), 1080)
 
-    ROI_txt = img[0:int(hi/3), int(wi / 6):int(5 * wi / 6)]
+    ROI_txt = img[0:int(hi/3), int(wi / 9):int(8 * wi / 9)]
     txtImage(txt, "horizontal", ROI_txt)
 
     txtpos = [[0.5, 0.1346, 0], [0.5, 0.9, 0], [0.95, 0.95, 0]]
@@ -245,11 +245,33 @@ def template10(bgPath ,fgPath,txt):
     fg_hsize = min(0.7 * wi * hf / wf, 0.7 * hi)
     img = il.imgadd(fgImg, bgImg, [0.6, 0.7], round(fg_hsize), 1080)
 
-    ROI_txt = img[0:hi, 0:int(wi / 2)]
+    ROI_txt = img[0:int(hi/3), 0:int(wi / 2)]
     txtImage(txt, "horizontal", ROI_txt)
     txtpos = [[0.05, 0.1, -1], [0.05, 0.6, -1], [0.95, 0.05, 0]]
     print("template 10")
     return img, txtpos
+
+def people_Time_template(fgPath,txt):
+    bgPath = "Time.png"
+    bgImg = cv2.imread(bgPath, -1)
+    fgImg = cv2.imread(fgPath, -1)
+    h, w, channel = fgImg.shape
+    if h / w < 7 / 5:
+        fgImg = fgImg[0:h, int(w / 2 - h * 5.0 / 14.0):int(w / 2 + h * 5.0 / 14.0)]  # crop background
+        fgImg = cv2.resize(fgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+    else:
+        fgImg = cv2.resize(fgImg, (774, 1080), interpolation=cv2.INTER_AREA)  # crop background
+
+    img = il.imgadd(bgImg, fgImg, [0.5, 0.5], 1080, 1080)
+    hi, wi, channeli = img.shape
+    # 生成文字的图像
+    ROI_txt = img[int(2*hi /3 ):hi, 0:int( wi / 2)]
+    txtImage([txt,''], "horizontal", ROI_txt)
+    txt_img = cv2.imread("txt_image/img" + str(1) + ".png", -1)
+    txtpos = [[0.05, 0.7, -1]]
+    img = il.imgadd(txt_img, img, [txtpos[0][1], txtpos[0][0]], txt_img.shape[0], 1080, txtpos[0][-1])
+
+    cv2.imwrite("results/results_time.png",img, [int(cv2.IMWRITE_PNG_COMPRESSION), 3])
 
 def choosetemplate(bgPath,fgPath,txt,outputPath):
     fgImg = cv2.imread(fgPath, -1)
@@ -265,13 +287,16 @@ def txtImage(txt,direction,img):
     folder = os.path.exists("txt_image")
     if not folder:
         os.makedirs("txt_image")
-    if direction =="horizontal":
+
+    if direction == "horizontal":
         h, w, channel = img.shape
         # choose txt_color by image background
         image = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
         bg_color = il.img_color(image)
+        if bg_color == None:
+            bg_color = [125,125,125]
         txt_color = [255 - bg_color[0], 255 - bg_color[1], 255 - bg_color[2]]
-
+        #txt_color = [255 , 255 , 255 ]
         # put the txt img on the bg
         draw = ImageDraw.Draw(image)
         fontpath = ["font/庞门正道标题体/庞门正道标题体2.0增强版.ttf",
@@ -307,7 +332,7 @@ def txtImage(txt,direction,img):
                           fill=(txt_color[0], txt_color[1], txt_color[2]))
                 txt_img.save("txt_image/img" + str(i + 1) + ".png", "PNG")
             else:
-                font = ImageFont.truetype(foo, 35 - 5 * i, encoding='utf-8')
+                font = ImageFont.truetype(foo, 30, encoding='utf-8')
                 tw, th = draw.textsize(txt[i], font=font)
                 if tw > w:
                     txt_str = txt[i].splitlines()
@@ -331,6 +356,8 @@ def txtImage(txt,direction,img):
         # choose txt_color by image background
         image = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
         bg_color = il.img_color(image)
+        if bg_color == None:
+            bg_color = [125,125,125]
         txt_color = [255 - bg_color[0], 255 - bg_color[1], 255 - bg_color[2]]
 
         # put the txt img on the bg
@@ -382,7 +409,7 @@ def txtImage(txt,direction,img):
                 h_count = 0
                 w_count = 1
                 h_count_max = 0
-                font = ImageFont.truetype(foo, 35 - 5 * i, encoding='utf-8')
+                font = ImageFont.truetype(foo, 30, encoding='utf-8')
                 for j, s2 in enumerate(txt[i]):
                     if j == 0:
                         ww, wh = font.getsize(s2)
@@ -420,9 +447,9 @@ def addallimage(ImgPath,txtpos,outputPath):
 if __name__=="__main__":
     outputPath_text = 'results/results.png'
     outputPath_notext = 'results/results_notext.png'
-    fgPath = 'foreground/WechatIMG65.png'
-    txt = [u"第十八届上海国际汽车展会", u"时间：4月28日\n地点：广东省广州市开源大道232号企业加速器道232号"]
-    #txt = [u"速度与激情",u"方向只有我一个\n 速度由我掌控",u"最高车速|燃油经济|操作稳定|行驶平顺"]
-    bgPath = 'background/WechatIMG246.jpeg'
+    fgPath = 'foreground/WechatIMG247.png'
+    txt = [u"第十八届上海国际汽车", u"时间：4月28日\n地点：广东省广州市开源大道232号企业加速器道"]
+    bgPath = 'background/WechatIMG63.jpeg'
     pos = choosetemplate(bgPath, fgPath, txt, outputPath_notext)
     addallimage(outputPath_notext,pos,outputPath_text)
+    #people_Time_template("foreground/People.png","道德的沦陷还是人性的扭曲")

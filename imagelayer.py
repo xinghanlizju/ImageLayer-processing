@@ -2,8 +2,9 @@ import cv2
 import numpy as np
 import colorsys
 import PIL.Image as Image
+import math
 
-def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=1080, dir=0):
+def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=1080, dir=0, MidImg = None):
     #read image
     img_1=fgImg
     img_2=bgImg
@@ -51,6 +52,8 @@ def imgadd(fgImg, bgImg, fgPosRatio, fgSize, bgSize=1080, dir=0):
     # roi = img_2_resize[max(int(fgPos[0]), 0):min(int(fgPos[0]+rows), img_2_resize.shape[0]-1), max(int(fgPos[1]), 0):min(int(fgPos[1]+cols), img_2_resize.shape[1]-1)]
 
     roi = img_2_resize[max(int(fgPos[0]),0):max(int(fgPos[0]),0) + rows, max(int(fgPos[1]),0):max(int(fgPos[1] ),0)+ cols]
+    if MidImg is not None:
+        roi = addWeightedImage(roi,MidImg,0.3)
 
     #create a mask of logo and create its inverse mask
     if channels > 3:
@@ -92,146 +95,6 @@ def addWeightedImage(foreimg, bgimg,alpha):
     img_add = cv2.addWeighted(foreimg, alpha, img2, beta, gamma)
     return img_add
 
-# 不透明度
-def Transparent(img_1, img_2, alpha):
-    img = img_1 * alpha + img_2 * (1-alpha)
-    return img
-
-# 正片叠底
-def Multiply (img_1, img_2):
-    img = img_1 * img_2
-    return img
-
-# 颜色加深
-def Color_burn (img_1, img_2):
-    img = 1 - (1 - img_2) / (img_1 + 0.001)
-
-    mask_1 = img  < 0
-    mask_2 = img  > 1
-
-    img = img * (1-mask_1)
-    img = img * (1-mask_2) + mask_2
-
-    '''
-    row, col, channel = img.shape
-    for i in range(row):
-        for j in range(col):
-            img[i, j, 0] = min(max(img[i, j, 0], 0), 1)
-            img[i, j, 1] = min(max(img[i, j, 1], 0), 1)
-            img[i, j, 2] = min(max(img[i, j, 2], 0), 1)
-    '''
-
-    return img
-
-# 颜色减淡
-def Color_dodge(img_1, img_2):
-    img = img_2 / (1.0 - img_1 + 0.001)
-    mask_2 = img  > 1
-    img = img * (1-mask_2) + mask_2
-    return img
-
-# 线性加深
-def Linear_burn(img_1, img_2):
-    img = img_1 + img_2 - 1
-    mask_1 = img  < 0
-    img = img * (1-mask_1)
-    return img
-
-# 线性减淡
-def Linear_dodge(img_1, img_2):
-    img = img_1 + img_2
-    mask_2 = img  > 1
-    img = img * (1-mask_2) + mask_2
-    return img
-
-# 变亮
-def Lighten(img_1, img_2):
-    img = img_1 - img_2
-    mask = img > 0
-    img = img_1 * mask + img_2 * (1-mask)
-
-    return img
-
-# 变暗
-def Dark(img_1, img_2):
-    img = img_1 - img_2
-    mask = img < 0
-    img = img_1 * mask + img_2 * (1-mask)
-
-    return img
-
-# 滤色
-def Screen(img_1, img_2):
-    img = 1- (1-img_1)*(1-img_2)
-
-    return img
-
-# 叠加
-def Overlay(img_1, img_2):
-    mask = img_2 < 0.5
-    img = 2 * img_1 * img_2 * mask + (1-mask) * (1- 2 * (1-img_1)*(1-img_2))
-
-    return img
-
-# 柔光
-def Soft_light(img_1, img_2):
-    mask = img_1 < 0.5
-    T1 = (2 * img_1 -1)*(img_2 - img_2 * img_2) + img_2
-    T2 = (2 * img_1 -1)*(np.sqrt(img_2) - img_2) + img_2
-    img = T1 * mask + T2 * (1-mask)
-
-    return img
-
-# 强光
-def Hard_light(img_1, img_2):
-    mask = img_1 < 0.5
-    T1 = 2 * img_1 * img_2
-    T2 = 1 - 2 * (1 - img_1) * (1 - img_2)
-    img = T1 * mask + T2 * (1-mask)
-
-    return img
-
-# 亮光
-def Vivid_light(img_1, img_2):
-    mask = img_1 < 0.5
-    T1 = 1 - (1 - img_2)/(2 * img_1 + 0.001)
-    T2 = img_2 / (2*(1-img_1) + 0.001)
-    mask_1 = T1 < 0
-    mask_2 = T2 > 1
-    T1 = T1 * (1-mask_1)
-    T2 = T2 * (1-mask_2) + mask_2
-    img = T1 * mask  + T2 * (1 - mask)
-
-    return img
-
-# 点光
-def Pin_light(img_1, img_2):
-    mask_1 = img_2 < (img_1 * 2 -1)
-    mask_2 = img_2 > 2 * img_1
-    T1 = 2 * img_1 -1
-    T2 = img_2
-    T3 = 2 * img_1
-    img = T1 * mask_1 + T2 * (1 - mask_1) * (1 - mask_2) + T3 * mask_2
-
-    return img
-
-# 线性光
-def Linear_light(img_1, img_2):
-    img = img_2 + img_1 * 2 - 1
-    mask_1 = img < 0
-    mask_2 = img > 1
-    img = img * (1-mask_1)
-    img = img * (1-mask_2) + mask_2
-
-    return img
-
-# 实色混合
-def Hard_mix(img_1, img_2):
-    img = img_1 + img_2
-    mask = img_1 + img_2 > 1
-    img = img * (1-mask) + mask
-    img = img * mask
-    return img
 
 def img_circle(img):
     # cv2.IMREAD_COLOR，读取BGR通道数值，即彩色通道，该参数为函数默认值
@@ -265,12 +128,12 @@ def img_color(image):
             continue
         # 转为HSV标准
         saturation = colorsys.rgb_to_hsv(r / 255.0, g / 255.0, b / 255.0)[1]
-        y = min(abs(r * 2104 + g * 4130 + b * 802 + 4096 + 131072) >> 13, 235)
-        y = (y - 16.0) / (235 - 16)
-
-        # 忽略高亮色
-        if y > 0.9:
-            continue
+        # y = min(abs(r * 2104 + g * 4130 + b * 802 + 4096 + 131072) >> 13, 235)
+        # y = (y - 16.0) / (235 - 16)
+        #
+        # # 忽略高亮色
+        # if y > 0.9:
+        #     continue
         score = (saturation + 0.1) * count
         if score > max_score:
             max_score = score
@@ -298,3 +161,44 @@ def complement_image(iname, oname):
     out_img = Image.new(mode, size)
     out_img.putdata([complement(*rgb) for rgb in in_data])
     out_img.save(oname)
+
+def hsv2rgb(h, s, v):
+    h = float(h)
+    s = float(s)
+    v = float(v)
+    h60 = h / 60.0
+    h60f = math.floor(h60)
+    hi = int(h60f) % 6
+    f = h60 - h60f
+    p = v * (1 - s)
+    q = v * (1 - f * s)
+    t = v * (1 - (1 - f) * s)
+    r, g, b = 0, 0, 0
+    if hi == 0: r, g, b = v, t, p
+    elif hi == 1: r, g, b = q, v, p
+    elif hi == 2: r, g, b = p, v, t
+    elif hi == 3: r, g, b = p, q, v
+    elif hi == 4: r, g, b = t, p, v
+    elif hi == 5: r, g, b = v, p, q
+    r, g, b = int(r * 255), int(g * 255), int(b * 255)
+    return r, g, b
+
+def rgb2hsv(r, g, b):
+    r, g, b = r/255.0, g/255.0, b/255.0
+    mx = max(r, g, b)
+    mn = min(r, g, b)
+    df = mx-mn
+    if mx == mn:
+        h = 0
+    elif mx == r:
+        h = (60 * ((g-b)/df) + 360) % 360
+    elif mx == g:
+        h = (60 * ((b-r)/df) + 120) % 360
+    elif mx == b:
+        h = (60 * ((r-g)/df) + 240) % 360
+    if mx == 0:
+        s = 0
+    else:
+        s = df/mx
+    v = mx
+    return h, s, v

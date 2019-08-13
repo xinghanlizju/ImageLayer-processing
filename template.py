@@ -5,7 +5,7 @@ from PIL import ImageFont, ImageDraw, Image
 from random import choice
 from math import ceil
 import os
-
+mainroot = os.path.dirname(os.path.realpath(__file__)) + '/'
 def template1(bgPath ,fgPath,txt) :
     bgImg = cv2.imread(bgPath, -1)
     fgImg = cv2.imread(fgPath, -1)
@@ -267,11 +267,11 @@ def people_Time_template(fgPath,txt):
     # 生成文字的图像
     ROI_txt = img[int(2*hi /3 ):hi, 0:int( wi / 2)]
     txtImage([txt,''], "horizontal", ROI_txt)
-    txt_img = cv2.imread("txt_image/img" + str(1) + ".png", -1)
+    txt_img = cv2.imread(mainroot+"txt_image/img" + str(1) + ".png", -1)
     txtpos = [[0.05, 0.7, -1]]
     img = il.imgadd(txt_img, img, [txtpos[0][1], txtpos[0][0]], txt_img.shape[0], 1080, txtpos[0][-1])
 
-    cv2.imwrite("results/results_time.png",img, [int(cv2.IMWRITE_PNG_COMPRESSION), 3])
+    cv2.imwrite(mainroot+"results/results_time.png",img, [int(cv2.IMWRITE_PNG_COMPRESSION), 3])
 
 def choosetemplate(bgPath,fgPath,txt,outputPath):
     fgImg = cv2.imread(fgPath, -1)
@@ -284,28 +284,32 @@ def choosetemplate(bgPath,fgPath,txt,outputPath):
     return txtpos
 
 def txtImage(txt,direction,img):
-    folder = os.path.exists("txt_image")
+    folder = os.path.exists(mainroot+"txt_image")
     if not folder:
-        os.makedirs("txt_image")
+        os.makedirs(mainroot+"txt_image")
+
+    h, w, channel = img.shape
+    # choose txt_color by image background
+    image = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    bg_color = il.img_color(image)
+
+    clh,cls,clv = il.rgb2hsv(bg_color[0],bg_color[1],bg_color[2])
+    clh = (clh+180) % 360
+    cls = 1-cls
+    clv = 1-clv
+
+    txt_color=il.hsv2rgb(clh,cls,clv)
+    #     txt_color = [255 - bg_color[0], 255 - bg_color[1], 255 - bg_color[2]]
+    # put the txt img on the bg
+    draw = ImageDraw.Draw(image)
+    fontpath = [mainroot + "font/庞门正道标题体/庞门正道标题体2.0增强版.ttf",
+                mainroot + "font/HanYiShangWeiShouShu/HYShangWeiShouShuW-1.ttf",
+                mainroot + "font/ZhanKuKuaiLeTi/ZhanKuKuaiLeTi2016XiuDingBan-1.ttf",
+                mainroot + "font/zhengqingke/zhengqingkehuangyou.ttf",
+                mainroot + "font/siyuan/SourceHanSansSC-Bold.otf"]
+    foo = choice(fontpath)
 
     if direction == "horizontal":
-        h, w, channel = img.shape
-        # choose txt_color by image background
-        image = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-        bg_color = il.img_color(image)
-        if bg_color == None:
-            bg_color = [125,125,125]
-        txt_color = [255 - bg_color[0], 255 - bg_color[1], 255 - bg_color[2]]
-        #txt_color = [255 , 255 , 255 ]
-        # put the txt img on the bg
-        draw = ImageDraw.Draw(image)
-        fontpath = ["font/庞门正道标题体/庞门正道标题体2.0增强版.ttf",
-                    "font/HanYiShangWeiShouShu/HYShangWeiShouShuW-1.ttf",
-                    "font/ZhanKuKuaiLeTi/ZhanKuKuaiLeTi2016XiuDingBan-1.ttf",
-                    "font/zhengqingke/zhengqingkehuangyou.ttf",
-                    "font/siyuan/SourceHanSansSC-Bold.otf"]
-        foo = choice(fontpath)
-
         # create the txt image
         for i in range(len(txt)):
             if txt[i] == '':
@@ -330,7 +334,7 @@ def txtImage(txt,direction,img):
                 draw = ImageDraw.Draw(txt_img)
                 draw.text((0, 0), txt[i], font=font,
                           fill=(txt_color[0], txt_color[1], txt_color[2]))
-                txt_img.save("txt_image/img" + str(i + 1) + ".png", "PNG")
+                txt_img.save(mainroot+"txt_image/img" + str(i + 1) + ".png", "PNG")
             else:
                 font = ImageFont.truetype(foo, 30, encoding='utf-8')
                 tw, th = draw.textsize(txt[i], font=font)
@@ -349,26 +353,8 @@ def txtImage(txt,direction,img):
                 draw = ImageDraw.Draw(txt_img)
                 draw.text((0, 0), txt[i], font=font,
                           fill=(txt_color[0], txt_color[1], txt_color[2]))
-                txt_img.save("txt_image/img" + str(i + 1) + ".png", "PNG")
+                txt_img.save(mainroot+"txt_image/img" + str(i + 1) + ".png", "PNG")
     elif direction == "vertical":
-        h, w, channel = img.shape
-
-        # choose txt_color by image background
-        image = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-        bg_color = il.img_color(image)
-        if bg_color == None:
-            bg_color = [125,125,125]
-        txt_color = [255 - bg_color[0], 255 - bg_color[1], 255 - bg_color[2]]
-
-        # put the txt img on the bg
-        draw = ImageDraw.Draw(image)
-        fontpath = ["font/庞门正道标题体/庞门正道标题体2.0增强版.ttf",
-                    "font/HanYiShangWeiShouShu/HYShangWeiShouShuW-1.ttf",
-                    "font/ZhanKuKuaiLeTi/ZhanKuKuaiLeTi2016XiuDingBan-1.ttf",
-                    "font/zhengqingke/zhengqingkehuangyou.ttf",
-                    "font/siyuan/SourceHanSansSC-Bold.otf"]
-        foo = choice(fontpath)
-
         for i in range(len(txt)):
             if txt[i] == '':
                 continue
@@ -400,7 +386,7 @@ def txtImage(txt,direction,img):
                     else:
                         down = down + wh + word_dir
                 roi = txt_img.crop(box=(0, 0, ww * w_count, wh * h_count_max))
-                roi.save("txt_image/img" + str(i + 1) + ".png", "PNG")
+                roi.save(mainroot+"txt_image/img" + str(i + 1) + ".png", "PNG")
             else:
                 right = 0  # 往右位移量
                 down = 0  # 往下位移量
@@ -429,16 +415,18 @@ def txtImage(txt,direction,img):
                     else:
                         down = down + wh + word_dir
                 roi = txt_img.crop(box=(0, 0, ww * w_count, wh * h_count_max))
-                roi.save("txt_image/img" + str(i + 1) + ".png", "PNG")
+                roi.save(mainroot+"txt_image/img" + str(i + 1) + ".png", "PNG")
     else:
         print("This txt direction "+direction+" is not defined!")
 
 def addallimage(ImgPath,txtpos,outputPath):
-    logoPath = "logo/WechatIMG126.png"
+    logoPath = mainroot+"logo/logo.png"
     img = cv2.imread(ImgPath,-1)
     logoimg = cv2.imread(logoPath,-1)
     for ti in range(len(txtpos)-1):
-        txt_img = cv2.imread("txt_image/img"+str(ti+1)+".png", -1)
+        txt_img_path = mainroot+"txt_image/img"+str(ti+1)+".png"
+        txt_img = cv2.imread(txt_img_path, -1)
+        os.remove(txt_img_path)
         txth, txtw, txtchannel = txt_img.shape
         img = il.imgadd(txt_img, img, [txtpos[ti][1], txtpos[ti][0]], txth, 1080, txtpos[ti][-1])
     img = il.imgadd(logoimg,img,[txtpos[-1][1],txtpos[-1][0]], int(1080/15), 1080)
